@@ -38,7 +38,7 @@ export default function FormSingIn() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex justify-center flex-col gap-8 text-white"
+        className="flex justify-center flex-col gap-8"
       >
         <div className="flex justify-center">
           <span className="font-medium text-3xl text-primary">
