@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -42,14 +41,15 @@ export default function FormSingIn() {
         className="flex justify-center flex-col gap-8 text-white"
       >
         <div className="flex justify-center">
-          <span className="font-medium text-2xl">Apollo Music</span>
+          <span className="font-medium text-3xl text-primary">
+            Apollo Music
+          </span>
         </div>
         <FormField
           control={form.control}
           name="establishmentCode"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Código do estabelecimento</FormLabel> */}
               <FormControl>
                 <Input placeholder="Código do estabelecimento" {...field} />
               </FormControl>
@@ -62,7 +62,6 @@ export default function FormSingIn() {
           name="username"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Usuário</FormLabel> */}
               <FormControl>
                 <Input placeholder="Usuário" {...field} />
               </FormControl>
@@ -75,7 +74,6 @@ export default function FormSingIn() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Senha</FormLabel> */}
               <FormControl>
                 <Input placeholder="Senha" {...field} />
               </FormControl>
