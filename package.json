@@ -2,10 +2,6 @@
   "name": "frontend-apollo",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "npm": "please-use-yarn",
-    "yarn": ">= 1.19.1"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
