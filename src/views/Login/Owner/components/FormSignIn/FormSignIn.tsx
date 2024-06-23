@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
 import {
   Form,
   FormControl,
@@ -13,57 +15,43 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  establishmentCode: z.string(),
-  username: z.string(),
+  email: z.string(),
   password: z.string(),
 });
 
-export default function FormSingIn() {
+export default function FormSignIn() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      establishmentCode: "",
-      username: "",
+      email: "",
       password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    /* router.push("/owner/home"); */
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex justify-center flex-col gap-8"
-      >
-        <div className="flex justify-center">
-          <span className="font-medium text-3xl text-primary">
-            Apollo Music
-          </span>
-        </div>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="establishmentCode"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Código do estabelecimento" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input placeholder="Usuário" {...field} />
+                <Input
+                  className="h-14 rounded-full text-lg text-center"
+                  placeholder="Email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,14 +63,19 @@ export default function FormSingIn() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Senha" {...field} />
+                <Input
+                  className="h-14 rounded-full text-lg text-center"
+                  placeholder="Senha"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className="w-80" type="submit">
-          Acessar
+        <Button className="h-14 rounded-full w-full space-x-4" type="submit">
+          <span className="text-lg">Acessar</span>
+          <ArrowRight />
         </Button>
       </form>
     </Form>
