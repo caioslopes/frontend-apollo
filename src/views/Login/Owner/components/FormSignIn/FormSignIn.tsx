@@ -38,7 +38,6 @@ export default function FormSignIn() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     try {
       const response = await fetcher("http://localhost:8080/auth/owner", {
         headers: {
@@ -65,6 +64,7 @@ export default function FormSignIn() {
             <FormItem>
               <FormControl>
                 <Input
+                  type="text"
                   className="h-14 rounded-full text-lg text-center"
                   placeholder="Código do estabelecimento"
                   {...field}
@@ -81,6 +81,7 @@ export default function FormSignIn() {
             <FormItem>
               <FormControl>
                 <Input
+                  type="email"
                   className="h-14 rounded-full text-lg text-center"
                   placeholder="Email"
                   {...field}
@@ -97,6 +98,7 @@ export default function FormSignIn() {
             <FormItem>
               <FormControl>
                 <Input
+                  type="password"
                   className="h-14 rounded-full text-lg text-center"
                   placeholder="Senha"
                   {...field}

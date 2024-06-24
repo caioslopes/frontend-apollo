@@ -28,8 +28,6 @@ export default function UserLogin({ params }: Props) {
     establishmentId: "",
   });
 
-  console.log(user);
-
   const content: any = {
     first: (
       <main className="flex flex-col h-screen bg-primary">
