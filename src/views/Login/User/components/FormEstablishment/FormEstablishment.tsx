@@ -8,12 +8,19 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
+import { Steps } from "../../UserLogin";
 
 const FormSchema = z.object({
   establishmentId: z.string(),
 });
 
-export function FormEstablishment() {
+type Props = {
+  setStep: Dispatch<SetStateAction<string>>;
+  setUser: Dispatch<SetStateAction<any>>;
+};
+
+export function FormEstablishment({ setStep, setUser }: Props) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -23,6 +30,11 @@ export function FormEstablishment() {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
+    setUser((prev: any) => ({
+      ...prev,
+      establishmentId: data.establishmentId,
+    }));
+    setStep(Steps.SECOND);
   }
 
   return (

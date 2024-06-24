@@ -4,6 +4,8 @@ import Top from "@/components/Top/Top";
 import { FormEstablishment } from "./components/FormEstablishment/FormEstablishment";
 import { FormUser } from "./components/FormUser/FormUser";
 import { useState } from "react";
+import SelectGenres from "./components/SelectGenres/SelectGenres";
+import { genresMocked } from "./components/SelectGenres/genres";
 
 type Props = {
   params: {
@@ -12,33 +14,45 @@ type Props = {
   };
 };
 
-enum Steps {
+export enum Steps {
   FIRST = "first",
   SECOND = "second",
   THIRD = "third",
 }
 
 export default function UserLogin({ params }: Props) {
-  const [steps, setSteps] = useState<any>(params.step);
+  const [step, setStep] = useState<any>(Steps.FIRST);
+  const [user, setUser] = useState<any>({
+    username: "",
+    genres: [],
+    establishmentId: "",
+  });
+
+  console.log(user);
 
   const content: any = {
     first: (
-      <Bottom title="Estabelecimento">
-        <FormEstablishment />
-      </Bottom>
+      <main className="flex flex-col h-screen bg-primary">
+        <Top />
+        <Bottom title="Estabelecimento">
+          <FormEstablishment setStep={setStep} setUser={setUser} />
+        </Bottom>
+      </main>
     ),
     second: (
-      <Bottom title="Estabelecimento">
-        <FormUser />
-      </Bottom>
+      <main className="flex flex-col h-screen bg-primary">
+        <Top />
+        <Bottom title="Zinho">
+          <FormUser setStep={setStep} setUser={setUser} />
+        </Bottom>
+      </main>
     ),
-    third: <div>oi</div>,
+    third: (
+      <main className="flex flex-col">
+        <SelectGenres genres={genresMocked} user={user} setUser={setUser} />
+      </main>
+    ),
   };
 
-  return (
-    <main className="bg-primary flex flex-col h-screen">
-      <Top />
-      {content[steps]}
-    </main>
-  );
+  return content[step];
 }
