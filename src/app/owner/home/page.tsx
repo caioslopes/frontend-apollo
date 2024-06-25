@@ -1,6 +1,18 @@
 import Home from "@/views/Owner/Home/Home";
 import React from "react";
 
-export default function page() {
-  return <Home />;
+type Props = {
+  searchParams: {
+    code: string;
+  };
+};
+
+export default function page({ searchParams }: Props) {
+  const { code } = searchParams;
+
+  const params = {
+    code: code ? code : "",
+  };
+
+  return <Home params={params} />;
 }

@@ -1,15 +1,27 @@
 import React from "react";
 import DrawerAccount from "./components/DrawerAccount/DrawerAccount";
-import EstablishmentCard from "./components/EstablishmentCard/EstablishmentCard";
+import CardEstablishment from "./components/CardEstablishment/CardEstablishment";
+import CardPlaylist from "./components/CardPlaylist/CardPlaylist";
 
-export default function Home() {
+type Props = {
+  params: {
+    code: string;
+  };
+};
+
+export default function Home({ params }: Props) {
+  /* if (params.code) {
+    console.log(params.code);
+  } */
+
   return (
     <div className="space-y-8">
       <div className="flex w-full justify-between">
         João Santos
         <DrawerAccount />
       </div>
-      <EstablishmentCard />
+      <CardEstablishment />
+      <CardPlaylist variant="notHasCode" />
     </div>
   );
 }

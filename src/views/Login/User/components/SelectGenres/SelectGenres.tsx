@@ -21,7 +21,7 @@ export default function SelectGenres({ genres, user, setUser }: Props) {
 
   async function handleUserLogin() {
     try {
-      const response = await fetcher("http://localhost:8080/auth/user", {
+      const response = await fetcher(`${process.env.BASE_URL}auth/user`, {
         headers: {
           "Content-Type": "application/json",
         },

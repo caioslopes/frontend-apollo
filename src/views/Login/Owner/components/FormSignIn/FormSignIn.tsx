@@ -39,7 +39,7 @@ export default function FormSignIn() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetcher("http://localhost:8080/auth/owner", {
+      const response = await fetcher(`${process.env.BASE_URL}auth/owner`, {
         headers: {
           "Content-Type": "application/json",
         },

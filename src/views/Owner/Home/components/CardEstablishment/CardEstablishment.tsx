@@ -5,7 +5,7 @@ import React from "react";
 
 import img from "../../../../../../public/assets/default.jpg";
 
-export default function EstablishmentCard() {
+export default function CardEstablishment() {
   return (
     <div className="w-full bg-[#f1f1f1] flex items-center justify-between p-4 rounded-lg">
       <div className="flex items-center gap-4">
