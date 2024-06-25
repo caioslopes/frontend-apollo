@@ -1,15 +1,18 @@
 import OwnerLogin from "@/views/Login/Owner/OwnerLogin";
+import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default function page() {
-  const ownerToken = cookies().get("ownerToken");
+  const accessToken = cookies().get("accessToken");
 
-  if (ownerToken) {
-    if (ownerToken?.value.length > 0 && ownerToken?.name === "ownerToken") {
-      redirect("/owner/home");
-    }
+  let user: any = {};
+
+  if (accessToken?.value) {
+    user = jwtDecode(accessToken.value);
   }
+
+  if (user?.scope?.includes("ROLE_ADMIN")) redirect("/owner/home");
 
   return <OwnerLogin />;
 }

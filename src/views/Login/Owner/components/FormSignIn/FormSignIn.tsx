@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { fetcher } from "@/utils/fetcher";
-import { setOwnerTokenOnCookies } from "@/auth/setOwnerTokenOnCookies";
+import { setAccessTokenOnCookies } from "@/auth/setAccessTokenOnCookies";
 
 const formSchema = z.object({
   establishmentId: z.string(),
@@ -48,7 +48,9 @@ export default function FormSignIn() {
       });
       /* console.log(response.email);
       console.log(response.token); */
-      await Promise.all([setOwnerTokenOnCookies(response.token)]);
+      await Promise.all([
+        setAccessTokenOnCookies(response.token, 20 * 60 * 60),
+      ]);
     } catch (error) {
       console.log(error);
     }

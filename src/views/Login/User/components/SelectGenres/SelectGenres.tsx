@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/utils/fetcher";
-import { setUserTokenOnCookies } from "@/auth/setUserTokenOnCookies";
+import { setAccessTokenOnCookies } from "@/auth/setAccessTokenOnCookies";
 
 type Props = {
   genres: string[];
@@ -30,7 +30,7 @@ export default function SelectGenres({ genres, user, setUser }: Props) {
       });
       /* console.log(response.userName);
       console.log(response.token); */
-      await Promise.all([setUserTokenOnCookies(response.token)]);
+      await Promise.all([setAccessTokenOnCookies(response.token, 2 * 60 * 60)]);
     } catch (error) {
       console.log(error);
     }

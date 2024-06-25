@@ -1,4 +1,5 @@
 import Index from "@/views/Index/Index";
+import { jwtDecode } from "jwt-decode";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -8,20 +9,17 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  const ownerToken = cookies().get("ownerToken");
-  const userToken = cookies().get("userToken");
+  const accessToken = cookies().get("accessToken");
 
-  if (ownerToken) {
-    if (ownerToken?.value.length > 0 && ownerToken?.name === "ownerToken") {
-      redirect("/owner/home");
-    }
+  let user: any = {};
+
+  if (accessToken?.value) {
+    user = jwtDecode(accessToken.value);
   }
 
-  if (userToken) {
-    if (userToken?.value.length > 0 && userToken?.name === "userToken") {
-      redirect("/user/home");
-    }
-  }
+  if (user?.scope?.includes("ROLE_ADMIN")) redirect("/owner/home");
+
+  if (user?.scope?.includes("ROLE_USER")) redirect("/user/home");
 
   return <Index />;
 }

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Drawer,
@@ -10,10 +11,14 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, User } from "lucide-react";
+import { ExternalLink, LogOut, User } from "lucide-react";
 import Link from "next/link";
+import { deleteAccessTokenFromCookies } from "@/auth/deleteAccessTokenFromCookies";
+import { useRouter } from "next/navigation";
 
 export default function DrawerAccount() {
+  const router = useRouter();
+
   return (
     <Drawer>
       <DrawerTrigger>
@@ -39,6 +44,19 @@ export default function DrawerAccount() {
                 <ExternalLink size={18} />
               </Link>
             </div>
+          </div>
+          <div className="flex justify-between">
+            Sair
+            <Button
+              className="p-0"
+              variant="ghost"
+              onClick={async () => {
+                await deleteAccessTokenFromCookies();
+                router.push("/");
+              }}
+            >
+              <LogOut className="text-primary" size={18} />
+            </Button>
           </div>
         </div>
         <DrawerFooter>
