@@ -1,6 +1,4 @@
 import Home from "@/views/Owner/Home/Home";
-import React from "react";
-
 type Props = {
   searchParams: {
     code: string;
