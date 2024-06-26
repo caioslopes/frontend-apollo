@@ -2,10 +2,10 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { CircleAlert, Settings } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 
 import img from "../../../../../../public/assets/default.jpg";
+import Link from "next/link";
 
 type Props = {
   hasAuthorizationCode: boolean;
@@ -24,8 +24,10 @@ export default function CardPlaylist({ hasAuthorizationCode }: Props) {
           <p className="font-bold text-sm">Publica/privada</p>
         </div>
         <div className="w-full flex justify-end">
-          <Button variant="secondary" className="flex gap-2 bg-white">
-            Configurar <Settings size={18} />
+          <Button variant="secondary" className="flex gap-2 bg-white" asChild>
+            <Link href="playlist">
+              Configurar <Settings size={18} />
+            </Link>
           </Button>
         </div>
       </div>
