@@ -1,5 +1,5 @@
-import React from "react";
+import About from "@/views/About/About";
 
 export default function page() {
-  return <div>About page</div>;
+  return <About />;
 }

@@ -1,5 +1,5 @@
-import User from "@/views/User/User";
+import Home from "@/views/User/Home/Home";
 
 export default function page() {
-  return <User />;
+  return <Home />;
 }
