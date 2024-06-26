@@ -14,9 +14,16 @@ import { ExternalLink, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { deleteAccessTokenFromCookies } from "@/auth/deleteAccessTokenFromCookies";
 import { useRouter } from "next/navigation";
+import { OwnerDto } from "@/@types/owner";
+import SpotifyStatus from "./components/SpotifyStatus/SpotifyStatus";
 
-export default function DrawerAccount() {
+type Props = {
+  owner: OwnerDto;
+};
+
+export default function DrawerAccount({ owner }: Props) {
   const router = useRouter();
+  const hasAuthorizationCode = owner.refreshToken ? true : false;
 
   return (
     <Drawer>
@@ -26,29 +33,15 @@ export default function DrawerAccount() {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Perfil</DrawerTitle>
-          <DrawerDescription>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          </DrawerDescription>
         </DrawerHeader>
         <div className="p-6 space-y-8">
           <div>
             <p className="font-bold">Informações da conta</p>
-            <p>Joãozinho</p>
+            <p>{owner.name}</p>
           </div>
           <div>
             <p className="font-bold">Spotify</p>
-            <div className="flex justify-between">
-              <p>Vincular conta Spotify</p>
-              <Link
-                href={
-                  process.env.AUTHORIZATION_SPOTIFY
-                    ? process.env.AUTHORIZATION_SPOTIFY
-                    : ""
-                }
-              >
-                <ExternalLink size={18} />
-              </Link>
-            </div>
+            <SpotifyStatus hasAuthorizationCode={hasAuthorizationCode} />
           </div>
           <div className="flex justify-between">
             Sair

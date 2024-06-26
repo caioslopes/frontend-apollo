@@ -11,13 +11,13 @@ export default function CardEstablishment() {
       <div className="flex items-center gap-4">
         <Image
           className="rounded-md"
-          width={100}
-          height={100}
+          width={60}
+          height={60}
           src={img}
           alt="Imagem Padrão"
         />
         <div>
-          <p className="font-bold text-lg text-primary">Zinho</p>
+          <p className="font-bold text-lg text-primary">Estabelecimento</p>
           <span className="bg-[#d9d9d9] text-primary text-xs px-2 rounded-full">
             Não configurado
           </span>

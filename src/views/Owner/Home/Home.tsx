@@ -15,22 +15,23 @@ type Props = {
 
 export default function Home({ params }: Props) {
   const { code, email } = params;
-  const { data, error, isLoading } = getOwnerDetails(email);
+  const { data, error, isLoading, mutate } = getOwnerDetails(email);
   const owner = data;
   const hasAuthorizationCode = owner?.refreshToken ? true : false;
 
   if (code && owner?.email && !owner.refreshToken) {
     getSpotifyAccessToken(code, owner.email);
+    mutate();
   }
 
   return (
     <div className="space-y-8">
-      <div className="flex w-full justify-between">
-        João Santos
-        <DrawerAccount />
-      </div>
       {owner && (
         <>
+          <div className="flex w-full justify-between">
+            {owner.name}
+            <DrawerAccount owner={owner} />
+          </div>
           <CardEstablishment />
           <CardPlaylist hasAuthorizationCode={hasAuthorizationCode} />
           <DrawerLinkSpotify hasAuthorizationCode={hasAuthorizationCode} />

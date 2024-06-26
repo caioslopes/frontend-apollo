@@ -5,10 +5,7 @@ import useSWR from "swr";
 export function getOwnerDetails(email: string) {
   const { data, error, isLoading, mutate } = useSWR<OwnerDto, Error>(
     `${process.env.BASE_URL}owner/${email}`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-    }
+    fetcher
   );
   return { data, error, isLoading, mutate };
 }
