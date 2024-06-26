@@ -12,11 +12,11 @@ export default function page({ searchParams }: Props) {
   const accessToken = cookies().get("accessToken");
   const { code } = searchParams;
 
-  const owner: OwnerDto = jwtDecode(accessToken?.value || "");
+  const owner = jwtDecode(accessToken?.value || "");
 
   const params = {
     code: code || "",
-    email: owner.email || "",
+    email: owner.sub || "",
   };
 
   return <Home params={params} />;

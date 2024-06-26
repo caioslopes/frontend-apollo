@@ -8,11 +8,13 @@ import Image from "next/image";
 import img from "../../../../../../public/assets/default.jpg";
 
 type Props = {
-  variant: string;
+  hasAuthorizationCode: boolean;
 };
 
-export default function CardPlaylist({ variant }: Props) {
-  if (variant === "hasCode") {
+export default function CardPlaylist({ hasAuthorizationCode }: Props) {
+  /* const {data, error, isLoading, mutate} = getOwnerPlaylist(); */
+
+  if (hasAuthorizationCode) {
     return (
       <div className="rounded-lg p-6 bg-[#f1f1f1] space-y-4">
         <Image className="rounded-md" src={img} alt="Imagem Padrão" />

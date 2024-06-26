@@ -13,17 +13,12 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
-export default function DrawerLinkSpotify() {
+type Props = {
+  hasAuthorizationCode: boolean;
+};
+
+export default function DrawerLinkSpotify({ hasAuthorizationCode }: Props) {
   const [open, setOpen] = useState<boolean>(false);
-
-  const openRef = useRef(true);
-
-  if (openRef.current) {
-    setTimeout(() => {
-      setOpen(true);
-      openRef.current = false;
-    }, 1000);
-  }
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>

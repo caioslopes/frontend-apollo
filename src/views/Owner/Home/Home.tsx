@@ -3,9 +3,8 @@ import DrawerAccount from "./components/DrawerAccount/DrawerAccount";
 import CardEstablishment from "./components/CardEstablishment/CardEstablishment";
 import CardPlaylist from "./components/CardPlaylist/CardPlaylist";
 import DrawerLinkSpotify from "./components/DrawerLinkSpotify/DrawerLinkSpotify";
+import { getOwnerDetails } from "../hooks/getOwnerDetails";
 import { getSpotifyAccessToken } from "../utils/getSpotifyAccessToken";
-import { getOwnerDetails } from "../utils/getOwnerDetails";
-import { OwnerDto } from "@/@types/owner";
 
 type Props = {
   params: {
@@ -16,12 +15,13 @@ type Props = {
 
 export default function Home({ params }: Props) {
   const { code, email } = params;
+  const { data, error, isLoading } = getOwnerDetails(email);
+  const owner = data;
+  const hasAuthorizationCode = owner?.refreshToken ? true : false;
 
-  /* const owner = getOwnerDetails(email); */
-
-  /* if (code && owner?.email && !owner.refreshToken) {
+  if (code && owner?.email && !owner.refreshToken) {
     getSpotifyAccessToken(code, owner.email);
-  } */
+  }
 
   return (
     <div className="space-y-8">
@@ -29,9 +29,13 @@ export default function Home({ params }: Props) {
         João Santos
         <DrawerAccount />
       </div>
-      <CardEstablishment />
-      <CardPlaylist variant="notHasCode" />
-      <DrawerLinkSpotify />
+      {owner && (
+        <>
+          <CardEstablishment />
+          <CardPlaylist hasAuthorizationCode={hasAuthorizationCode} />
+          <DrawerLinkSpotify hasAuthorizationCode={hasAuthorizationCode} />
+        </>
+      )}
     </div>
   );
 }
