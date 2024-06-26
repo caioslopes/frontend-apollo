@@ -1,3 +1,5 @@
+import Dashboard from "@/views/User/Dashboard/Dashboard";
+
 export default function dashboard() {
-  return <div>dashboard</div>;
+  return <Dashboard />;
 }
