@@ -27,6 +27,7 @@ export async function fetcher<JSON = any>(
   const authorizationHeader = {
     Authorization: `Bearer ${token}`,
   };
+  
   const headers = new Headers({
     ...authorizationHeader,
     "Content-Type": "application/json",

@@ -22,9 +22,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <main className="mt-10 px-6 h-[calc(100vh_-_8rem)] overflow-auto">
-        {children}
-      </main>
+      <main className="mt-10 px-6 mb-28">{children}</main>
       <Menu />
     </>
   );

@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import {
   Drawer,
   DrawerClose,
@@ -40,7 +39,13 @@ export default function DrawerAccount() {
             <p className="font-bold">Spotify</p>
             <div className="flex justify-between">
               <p>Vincular conta Spotify</p>
-              <Link href="https://accounts.spotify.com/pt-BR/authorize?response_type=code&scope=user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20playlist-read-private%20playlist-read-collaborative%20playlist-modify-private%20playlist-modify-public&client_id=d5efeedcdd7f41f8a323384fcd81f2be&redirect_uri=http://localhost:3000/owner/home">
+              <Link
+                href={
+                  process.env.AUTHORIZATION_SPOTIFY
+                    ? process.env.AUTHORIZATION_SPOTIFY
+                    : ""
+                }
+              >
                 <ExternalLink size={18} />
               </Link>
             </div>

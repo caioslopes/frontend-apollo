@@ -1,7 +1,7 @@
-import React from "react";
 import DrawerAccount from "./components/DrawerAccount/DrawerAccount";
 import CardEstablishment from "./components/CardEstablishment/CardEstablishment";
 import CardPlaylist from "./components/CardPlaylist/CardPlaylist";
+import DrawerLinkSpotify from "./components/DrawerLinkSpotify/DrawerLinkSpotify";
 
 type Props = {
   params: {
@@ -9,10 +9,8 @@ type Props = {
   };
 };
 
-export default function Home({ params }: Props) {
-  /* if (params.code) {
-    console.log(params.code);
-  } */
+export default async function Home({ params }: Props) {
+  const authorization_code = params.code;
 
   return (
     <div className="space-y-8">
@@ -22,6 +20,7 @@ export default function Home({ params }: Props) {
       </div>
       <CardEstablishment />
       <CardPlaylist variant="notHasCode" />
+      <DrawerLinkSpotify />
     </div>
   );
 }
