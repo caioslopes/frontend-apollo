@@ -1,11 +1,11 @@
 "use server";
 import { cookies } from "next/headers";
 
-export async function setOwnerTokenOnCookies(value: string) {
+export async function setAccessTokenOnCookies(value: string, maxAge: number) {
   try {
     await Promise.all([
-      cookies().set("ownerToken", value, {
-        maxAge: 20 * 60 * 60,
+      cookies().set("accessToken", value, {
+        maxAge: maxAge,
       }),
     ]);
   } catch (error) {

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const ownerToken = req.cookies.get("ownerToken");
-  const userToken = req.cookies.get("userToken");
+  const accessToken = req.cookies.get("accessToken");
+  const spotifyAccessToken = req.cookies.get("spotify_accessToken");
 
-  if (!ownerToken && !userToken) {
+  if (!accessToken) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 }

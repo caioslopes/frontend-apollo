@@ -1,4 +1,5 @@
 import UserLogin from "@/views/Login/User/UserLogin";
+import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export default function page({ searchParams }: Props) {
-  const userToken = cookies().get("userToken");
+  const accessToken = cookies().get("accessToken");
   const { step, establishmentId } = searchParams;
 
   const params = {
@@ -18,11 +19,12 @@ export default function page({ searchParams }: Props) {
     establishmentId: establishmentId ? establishmentId : "",
   };
 
-  if (userToken) {
-    if (userToken?.value.length > 0 && userToken?.name === "userToken") {
-      redirect("/user/home");
-    }
+  let user: any = {};
+
+  if (accessToken?.value) {
+    user = jwtDecode(accessToken.value);
   }
+  if (user?.scope?.includes("ROLE_USER")) redirect("/user/home");
 
   return <UserLogin params={params} />;
 }
